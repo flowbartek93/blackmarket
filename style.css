@@ -1,0 +1,62 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.background {
+    height: 100vh;
+    width: 100vw;
+    background-image: url('Darknet-hacker.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: saturate(0);
+
+
+
+}
+
+.choice-panel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+
+.register,
+.login {
+    background-color: black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    border: 2px solid white;
+    cursor: pointer;
+
+}
+
+.register__button:hover,
+.login__button:hover {
+    -moz-box-shadow: 0px 0px 10px -1px rgba(16, 115, 5, 1);
+    box-shadow: 0px 0px 10px -1px rgba(16, 115, 5, 1);
+    border: 2px solid rgba(16, 115, 5, 1)
+}
+
+.register__icon,
+.login__icon {
+    font-size: 10rem;
+    color: white;
+}
+
+
+
+.register__desc,
+.login__desc {
+    font-family: 'Space Mono', monospace;
+    color: white
+}

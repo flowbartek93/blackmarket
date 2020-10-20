@@ -1,0 +1,36 @@
+application is for fun purposes only.
+
+Similation of buying illegall weapons on black market.
+
+Assumptions
+1. Front end
+    a. Make a choice between log in and registration
+        -when log in, display a shop.
+        -when registration display registration form and put data into local storage
+        -display funny simulation of logging in
+    b. log in and start selecting things to basket
+        -you can add and remoove from basket then proceed to checkout
+        -when in checkout count sum of all items
+        -you can check list of items you did buy.
+
+
+
+
+Implementation:
+
+Create front page with two choices for log in and register - flexbox or grid.
+for log in two inputs, for registration also or 3 (ex. login, password, secret key)
+that creates values in local storage whcih u can use to log in.
+when logged in display items in grid and panel for choice types of weapons
+use animation css for that purposes.
+
+all in OOP
+
+classes:
+
+register
+log in
+shop
+checkout
+loading screen
+list of items bought
