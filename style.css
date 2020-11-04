@@ -10,12 +10,19 @@
     background-image: url('Darknet-hacker.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    filter: saturate(0);
+    filter: opacity(1) saturate(0);
+
 
 
 
 }
 
+
+body {
+    font-family: 'Space Mono', monospace;
+}
+
+/* login and register page */
 .choice-panel {
     position: absolute;
     top: 50%;
@@ -42,10 +49,30 @@
 
 .register__button:hover,
 .login__button:hover {
-    -moz-box-shadow: 0px 0px 10px -1px rgba(16, 115, 5, 1);
     box-shadow: 0px 0px 10px -1px rgba(16, 115, 5, 1);
     border: 2px solid rgba(16, 115, 5, 1)
 }
+
+.register__button:hover .register__icon {
+    color: rgba(16, 115, 5, 1);
+
+}
+
+.register__button:hover .register__desc {
+    color: rgba(16, 115, 5, 1);
+}
+
+.login__button:hover .login__icon {
+    color: rgba(16, 115, 5, 1);
+}
+
+.login__button:hover .login__desc {
+    color: rgba(16, 115, 5, 1);
+
+}
+
+
+
 
 .register__icon,
 .login__icon {
@@ -59,4 +86,264 @@
 .login__desc {
     font-family: 'Space Mono', monospace;
     color: white
+}
+
+/* register form */
+
+.register-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 500px;
+    justify-content: center;
+    background-color: black;
+    padding: 0 20px 0 20px;
+    border-radius: 10px;
+    color: white;
+    align-items: center;
+    font-size: 2rem;
+
+}
+
+#login,
+#password {
+    width: 20rem;
+    height: 3rem;
+    background-color: white;
+    border: none;
+    margin: 10px 0 10px 0;
+    font-size: 3rem;
+    border-radius: 10px;
+}
+
+#login:focus,
+#password:focus {
+    box-shadow: 0px 0px 5px 5px rgba(16, 115, 5, 1);
+
+}
+
+#register-form__submit {
+    height: 3rem;
+    width: 10rem;
+    font-family: 'Space Mono', monospace;
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+
+#register-form__submit:hover {
+    box-shadow: 0px 0px 5px 3px rgba(16, 115, 5, 1);
+}
+
+.title {
+    font-size: 42px;
+    color: rgba(16, 115, 5, 1);
+    font-weight: 800;
+    margin-bottom: 2rem;
+}
+
+.red-alert {
+    display: block;
+    width: 60%;
+    text-align: center;
+    color: red;
+    font-size: 20px;
+    margin-top: 2rem;
+}
+
+.loading {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+
+
+}
+
+.loading__stage {
+    margin-top: 1.5rem;
+}
+
+/* Animation of loading */
+
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/*Shop.html*/
+.front-page__shop {
+    background-color: #000000;
+    color: white;
+}
+
+.shop-container {
+    display: grid;
+    width: 100%;
+    height: 100%;
+
+    grid-template-areas:
+        "bar bar"
+        "categories shop";
+
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 500px 1fr;
+
+}
+
+
+/* Górny pasek */
+.shop-container__bar {
+
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background-color: black;
+    width: 100%;
+    display: inline-flex;
+    color: white;
+    align-items: center;
+    border-bottom: 2px solid white;
+    justify-content: space-around;
+    height: 60px;
+
+}
+
+.shop-container__logout {
+    height: 40px;
+    width: 100px;
+    border: 2px solid white;
+    background-color: black;
+    color: white;
+
+}
+
+
+
+.basket__icon {
+    font-size: 30px;
+}
+
+
+/* Kategorie broni */
+.shop-container__categories {
+    grid-area: categories;
+    background-color: #0C0C0C;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border-right: 2px solid white;
+
+
+}
+
+.type {
+    font-family: 'Space Mono', monospace;
+    font-size: 30px;
+    color: white;
+    background-color: black;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.type:hover {
+
+    color: black;
+    background-color: white;
+
+}
+
+.categories__title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 2rem;
+}
+
+
+
+.shop-container__items {
+    grid-area: shop;
+    display: grid;
+    padding: 50px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 400px);
+    column-gap: 20px;
+    row-gap: 20px;
+
+
+
+}
+
+.shop-container__single-item {
+
+    border: 2px solid white;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+
+
+}
+
+.shop-container__single-item img {
+    object-fit: contain;
+    height: 150px;
+}
+
+.single-item__desc {
+    font-size: 12px;
+    text-align: justify;
+
 }

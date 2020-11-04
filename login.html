@@ -9,28 +9,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
 </head>
 
-<body class="front-page">
+<body class="login-page__body">
 
 
     <div class="background">
     </div>
 
-
+    <div class="loading">
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <p class="loading__stage"></p>
+    </div>
 
     <form class="register-form">
-
+        <p class="title">Zaloguj się</p>
         <label for="login">Podaj login</label>
         <input type="text" name="login" id="login" placeholder="">
 
         <label for="password">Podaj hasło</label>
         <input type="password" name="login" id="password" placeholder="">
 
-        <input type="submit" id="register-form__submit" value="Utwórz Konto">
+        <input type="submit" id="register-form__submit" value="Zaloguj się">
 
     </form>
 
+    <script src="Login.js" type="module"></script>
 
-    <script src="Register.js" type="module"></script>
+
 
 </body>
 
