@@ -19,8 +19,11 @@
          //  console.log(this.background);
          //  console.log(this.body);
 
-         this.form.style.display = "none";
+
          this.body.style.backgroundColor = "black";
+         setTimeout(() => {
+             this.form.style.display = "none";
+         }, 700)
          this.fadeOut();
          this.loading();
 

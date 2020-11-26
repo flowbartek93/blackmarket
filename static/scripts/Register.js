@@ -1,64 +1,85 @@
 class Register {
-    constructor() {
+    constructor(form) {
+
 
         this.inputLogin = document.getElementById('login')
         this.inputPassword = document.getElementById('password')
+        this.form = form;
 
     }
 
 
-    checkInputs() {
+    validate() {
 
-        if (this.inputLogin.value === '' || this.inputPassword.value === '') {
-            this.alert('Musisz wypełnić wszystkie pola')
+        if (this.form.querySelector('.red-alert') || this.form.querySelector('.green-alert')) {
+            this.form.querySelector('.alert').remove();
         }
 
+        if (this.inputLogin.value === '' || this.inputPassword.value === '') {
+            this.redalert('Musisz wypełnić wszystkie pola');
+            return;
+
+        } else {
+            this.sendDataToServer();
+            this.greenalert("Konto utworzone !")
+        }
 
     }
-    alert(text) {
+
+    getInputsData() {
+
+        const userData = {
+            login: this.inputLogin.value,
+            password: this.inputPassword.value
+        }
+        return userData;
+    }
+
+
+
+    sendDataToServer() {
+
+        const userdata = this.getInputsData();
+        fetch('/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userdata)
+        })
+    }
+
+
+    redalert(text) {
+
         const par = document.createElement('p')
-        par.classList.add('red-alert');
+        par.setAttribute('class', 'alert red-alert')
         par.textContent = text;
-        document.querySelector('.register-form').appendChild(par)
+        this.form.appendChild(par)
     }
 
-
+    greenalert(text) {
+        const par = document.createElement('p')
+        par.setAttribute('class', 'alert green-alert')
+        par.textContent = text;
+        this.form.appendChild(par)
+    }
 
 }
 
 
+
 function eventListener() {
-    const formSubmit = document.querySelector('.register-form');
+    const form = document.querySelector('.register-form')
 
-    const newUser = new Register();
-
-    formSubmit.addEventListener('submit', (e) => {
-        e.preventDefault();
-        newUser.checkInputs();
-
-        const form = e.target;
-        const formData = new FormData(form)
-
-        const userData = {
-            login: formData.get('login'),
-            password: formData.get('password'),
-        }
-
-        console.log(userData);
-
-        fetch('/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userData)
-            })
-            .then(response => {
-                console.log(response);
-
-            })
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const startRegistration = new Register(form)
+        startRegistration.validate();
 
     })
+
+
 }
 
 document.addEventListener('DOMContentLoaded', eventListener)
