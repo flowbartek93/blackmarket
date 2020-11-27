@@ -5,16 +5,9 @@ class Weapons {
 
     async displayWeapon(path) {
 
-        try {
-            const container = document.querySelector('.shop-container')
-            await fetch(`weapons/${path}`).then(response => response.json()).then(data => container.innerHTML += data).catch(err => console.log(err));
-        } catch (err) {
-            console.log(err);
+        const container = document.querySelector('.shop-container')
 
-        }
-
-
-
+        await fetch(`weapons/${path}`).then(response => response.json()).then(data => container.innerHTML += data);
 
 
     }
@@ -62,7 +55,6 @@ class Weapons {
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    const buttons = document.querySelectorAll('.type')
     const weapons = new Weapons();
     weapons.chooseWeapon();
 
