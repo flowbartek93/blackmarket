@@ -1,8 +1,41 @@
 const express = require('express');
 const path = require('path');
 const MongoClient = require('mongodb').MongoClient;
+const expressHandlebars = require('express-handlebars');
+const router = express.Router();
+const {
+    resourceUsage
+} = require('process');
+const {
+    json
+} = require('body-parser');
 
 let _db;
+
+
+
+
+
+/* express functions */
+
+
+
+const app = express();
+app.use(express.static(__dirname + '/static'))
+
+app.engine('handlebars', expressHandlebars({
+    defaultLayout: 'weapons',
+}))
+app.set('view engine', 'handlebars')
+
+app.use(express.json())
+app.use(express.urlencoded({
+    extended: true
+}))
+
+
+
+
 
 
 async function dbConnect() {
@@ -38,18 +71,6 @@ async function checkUser(userData) {
 }
 
 
-/* express functions */
-
-
-
-const app = express();
-
-app.use(express.json())
-app.use(express.urlencoded({
-    extended: true
-}))
-
-app.use(express.static('static'))
 
 /* User Registration */
 
@@ -72,6 +93,23 @@ app.post('/login', async (req, res) => {
 
     res.end();
 })
+
+app.get('/weapons/:id', (req, res) => {
+    console.log('req');
+    console.log(req.url);
+
+    let type = req.params.id;
+    res.render(type, function (err, html) {
+
+        res.json(html);
+
+
+
+    })
+
+
+})
+
 
 
 app.listen(process.env.PORT || 5000, () => {
