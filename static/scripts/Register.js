@@ -21,7 +21,9 @@ class Register {
 
         } else {
             this.sendDataToServer();
-            this.greenalert("Konto utworzone !")
+            this.greenalert("Account created...")
+            this.ProccedToLogin()
+
         }
 
     }
@@ -33,6 +35,23 @@ class Register {
             password: this.inputPassword.value
         }
         return userData;
+    }
+
+    ProccedToLogin() {
+
+        /* remove register buttons in order to proceed to login phase */
+        const registerButtons = document.querySelector('.register-form__buttons')
+        registerButtons.remove();
+        /* add login button */
+        const loginBtn = document.createElement('a')
+        loginBtn.classList.add('loginAfterRegister')
+        loginBtn.textContent = "Procced to login"
+        this.form.appendChild(loginBtn)
+
+        loginBtn.addEventListener('click', () => {
+            window.location.href = "login.html"
+        })
+
     }
 
 

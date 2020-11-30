@@ -10,16 +10,9 @@ class Weapons {
     }
 
     async displayWeapon(path) {
-
         const container = await document.querySelector('.shop-container__items')
-
         await fetch(`weapons/${path}`).then(response => response.json()).then(data => container.innerHTML = data);
-
-
     }
-
-
-
 
     chooseWeapon() {
 
