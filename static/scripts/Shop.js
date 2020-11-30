@@ -1,16 +1,25 @@
+import {
+    Login
+} from './Login.js'
+
 class Weapons {
+
     constructor() {
+
         this.buttons = document.querySelectorAll('.type')
     }
 
     async displayWeapon(path) {
 
-        const container = document.querySelector('.shop-container')
+        const container = await document.querySelector('.shop-container__items')
 
-        await fetch(`weapons/${path}`).then(response => response.json()).then(data => container.innerHTML += data);
+        await fetch(`weapons/${path}`).then(response => response.json()).then(data => container.innerHTML = data);
 
 
     }
+
+
+
 
     chooseWeapon() {
 
@@ -31,15 +40,15 @@ class Weapons {
                     case 'grenades':
                         console.log('click');
 
-                        this.displayWeapon(weaponType)
+                        return this.displayWeapon(weaponType)
 
                     case 'closerange':
                         console.log('click');
-                        this.displayWeapon(weaponType)
+                        return this.displayWeapon(weaponType)
 
                     case 'rocketlauchner':
                         console.log('click');
-                        this.displayWeapon(weaponType)
+                        return this.displayWeapon(weaponType)
 
                 }
 
@@ -48,16 +57,25 @@ class Weapons {
 
     }
 
-}
+    static checkForSession() {
 
+        const session = window.sessionStorage;
+        console.log(session);
+        if (!session.login) {
+            window.location.replace("login.html")
+        }
+
+    }
+
+}
 
 
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    Weapons.checkForSession();
     const weapons = new Weapons();
     weapons.chooseWeapon();
-
 
 
 })

@@ -1,0 +1,141 @@
+{
+    "pistols":{
+        "glock":{
+            "name": "glock 17",
+            "price": "glock 17",
+            "img": "./images/pistols/glock.png"
+           
+        },
+
+        "smith":{
+            "name": "Smith&Weasson M&P 9",
+            "price": "350$",
+            "img": "./images/pistols/smith.png"
+        },
+
+        "makarov":{
+            "name": "Makarov",
+            "price": "90$",
+            "img": "./images/pistols/makarov.jpg"
+        },
+
+        "beretta":{
+            "name": "Beretta 92",
+            "price": "267$",
+            "img": "./images/pistols/beretta92.jpg"
+        },
+
+        "fiveseven":{
+            "name": "FN FiveSeven",
+            "price": "390$",
+            "img": "./images/pistols/fiveseven.jpg"
+        }
+    },
+
+    "rifles":{
+        "ak47":{
+            "name": "Kalashnikov rifle",
+            "price": "299$",
+            "img": "./images/rifles/ak.png"
+        },
+       
+    
+        "famas":{
+            "name": "Famas",
+            "price": "529$",
+            "img": "./images/rifles/famas.png"
+        },
+        
+        "fn2000":{
+            "name": "FN 2000",
+            "price": "1200$",
+            "img": "./images/rifles/fn2000.png"
+        },
+    
+        "M16":{
+            "name": "m16",
+            "price": "800$",
+            "img": "./images/rifles/m16.png"
+        },
+        "m4":{
+            "name": "Colt m4",
+            "price": "1100$",
+            "img": "./images/rifles/m4.png"
+        }
+    },
+
+    
+    "grenades":{
+        "F1":{
+            "name": "F1 grenade",
+            "price": "120$",
+            "img": "./images/grenades/f1.jpg"
+        },
+       
+    
+        "Flashbang":{
+            "name": "Flashbang grenade",
+            "price": "90$",
+            "img": "./images/grenades/flashbang.jpg"
+        },
+        
+        "smoke":{
+            "name": "Smoke grenade",
+            "price": "70$",
+            "img": "./images/grenades/smoke.jpg"
+        }
+    },
+
+    "closerange":{
+        "baton":{
+            "name": "Tactical Baton",
+            "price": "20$",
+            "img": "./images/close/baton.png"
+        },
+        "karambit":{
+            "name": "Karambit",
+            "price": "80$",
+            "img": "./images/close/karambit.jpg"
+        },
+        "katana":{
+            "name": "Katana",
+            "price": "50$",
+            "img": "./images/close/katana.png"
+        },
+        "knife":{
+            "name": "Battle knife",
+            "price": "120$",
+            "img": "./images/close/knife.jpg"
+        },
+        "machette":{
+            "name": "Machette",
+            "price": "120$",
+            "img": "./images/close/machete.png"
+        }
+
+    },
+
+    "ppanc":{
+        "javelin":{
+            "name": "Javelin Missile Lauchner",
+            "price": "3000$",
+            "img": "./images/ppanc/javelin.jpg"
+        },
+        "rpg":{
+            "name": "RPG - 7",
+            "price": "1200$",
+            "img": "./images/ppanc/rpg.png"
+        },
+        "stinger":{
+            "name": "FIM-92 Stinger",
+            "price": "5600$",
+            "img": "./images/ppanc/stinger.png"
+        }
+
+    }
+
+
+
+
+
+}

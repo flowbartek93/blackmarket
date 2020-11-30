@@ -3,22 +3,20 @@ const path = require('path');
 const MongoClient = require('mongodb').MongoClient;
 const expressHandlebars = require('express-handlebars');
 const router = express.Router();
+const session = require('express-session')
 const {
     resourceUsage
 } = require('process');
 const {
     json
 } = require('body-parser');
+const {
+    request
+} = require('express');
 
 let _db;
 
-
-
-
-
 /* express functions */
-
-
 
 const app = express();
 app.use(express.static(__dirname + '/static'))
@@ -33,9 +31,11 @@ app.use(express.urlencoded({
     extended: true
 }))
 
-
-
-
+app.use(session({
+    secret: `hidden`,
+    saveUninitialized: false,
+    resave: false
+}))
 
 
 async function dbConnect() {
@@ -72,8 +72,11 @@ async function checkUser(userData) {
 
 
 
-/* User Registration */
 
+
+
+
+/* User Registration */
 app.post('/register', (req, res) => {
     registerUser(req.body).catch(console.error);
     res.end();
@@ -84,9 +87,20 @@ app.post('/register', (req, res) => {
 app.post('/login', async (req, res) => {
 
 
+    let sess;
     let userExists = await checkUser(req.body).catch(console.error)
+
     if (userExists === true) {
-        res.json(userExists)
+
+        sess = req.session
+        sess.username = req.body.login;
+        console.log(sess.username);
+
+
+        res.json({
+            userExists,
+            sess,
+        })
     } else if (userExists === false) {
         res.json(userExists)
     }
@@ -94,18 +108,53 @@ app.post('/login', async (req, res) => {
     res.end();
 })
 
-app.get('/weapons/:id', (req, res) => {
-    console.log('req');
-    console.log(req.url);
 
+
+app.get('/weapons/:id', async (req, res) => {
+
+
+    await dbConnect()
+    const content = await _db.db('blackmarket').collection('items').find().toArray();
+    let contentItem;
     let type = req.params.id;
-    res.render(type, function (err, html) {
 
-        res.json(html);
+    // if (type === 'pistols') {
+    //     contentItem = content[0].pistols;
+    // }
 
 
 
-    })
+
+    switch (type) {
+        case 'pistols':
+            contentItem = content[0].pistols;
+            break;
+        case 'rifles':
+            contentItem = content[1].rifles;
+            break;
+        case 'grenades':
+            contentItem = content[2].grenades;
+            break;
+        case 'closerange':
+            contentItem = content[3].closerange;
+            break;
+        case 'rocketlauchner':
+            contentItem = content[4].ppanc;
+            break;
+    }
+
+
+
+    console.log(contentItem);
+
+
+    await res.render(type, {
+            contentItem
+        },
+        function (err, html) {
+            res.json(html);
+
+        })
 
 
 })

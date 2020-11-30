@@ -2,13 +2,16 @@ import {
     Animations
 } from './Animations.js'
 
-class Login {
+export class Login {
     constructor(form) {
 
         this.inputLogin = document.getElementById('login');
         this.inputPassword = document.getElementById('password');
         this.form = form;
+        this.session;
+
     }
+
 
     async validate() {
 
@@ -56,22 +59,40 @@ class Login {
 
         const data = await response.json();
 
+        console.log(data);
 
-        if (data === true) {
+
+
+        if (data.userExists === true) {
+            this.session = data.sess;
+            console.log(this.session);
+            this.startSession();
+
             const toshop = new Animations({
                 form: document.querySelector('.login-form'),
                 background: document.querySelector('.background'),
                 body: document.querySelector('body')
             });
+
             toshop.run();
-            return data;
+
+
+
+            return data.userExists
+
+
 
         } else {
-            return data;
+            return data.userExists
         }
+
 
     }
 
+    startSession() {
+        const session = window.sessionStorage;
+        session.setItem('login', this.session.username);
+    }
     redalert(text) {
 
         const par = document.createElement('p')
@@ -91,14 +112,17 @@ class Login {
 }
 
 
-
 function eventListener() {
+
+
     const form = document.querySelector('.login-form')
 
     form.addEventListener('submit', (event) => {
         event.preventDefault();
         const startLogin = new Login(form)
         startLogin.validate();
+
+
 
     })
 
