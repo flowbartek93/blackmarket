@@ -14,15 +14,34 @@
 
     <div class="shop-container">
         <div class="shop-container__bar">
-            <p class="log-as">Zalogowany jako:<span></span></p>
-            <div class="basket">
+
+            <div class="shop-container__bar_elements--left">
+                <p class="log-as">Welcome, <span id="session__user"></span></p>
+                <button class="shop-container__logout">Log out</button>
+            </div>
+
+            <div class="shop-container__bar_elements--right">
+
                 <span class="basket__icon">
                     <i class="fas fa-cart-plus"></i>
+                    <span class="basket__amount">0</span>
                 </span>
-                <div class="basket__amount"></div>
+
             </div>
-            <button class="shop-container__logout">Wyloguj się</button>
+
+
+
+
+
+
+
         </div>
+
+
+
+
+
+
         <div class="shop-container__categories">
             <div class="bg-rifle">
 
@@ -30,11 +49,14 @@
             <p class="bg-title">Available weapons</p>
 
 
-            <button class="type" data-type="pistols">Pistolety</button>
-            <button class="type" data-type="rifles">Karabiny i karabinki</button>
-            <button class="type" data-type="grenades">Granaty</button>
-            <button class="type" data-type="closerange">Broń biała</button>
-            <button class="type" data-type="rocketlauchner">Broń przeciwpancerna</button>
+            <button class="type" data-type="pistols">Pistols</button>
+            <button class="type" data-type="rifles">Automatic Rifles</button>
+            <button class="type" data-type="grenades">Grenades</button>
+            <button class="type" data-type="closerange">Close range</button>
+            <button class="type" data-type="rocketlauchner">Heavy weapons</button>
+
+
+
 
         </div>
 

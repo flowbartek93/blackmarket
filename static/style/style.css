@@ -327,30 +327,91 @@ body {
     top: 0;
     left: 0;
     z-index: 10;
+    display: inline-flex;
     background-color: #050505;
     width: 100%;
-    display: inline-flex;
     color: white;
     align-items: center;
+    justify-content: space-evenly;
     border-bottom: 4px solid #1a1919;
-    justify-content: space-around;
-    height: 60px;
+    height: 100px;
+    font-style: 'Space mono';
 
+}
+
+
+
+
+.shop-container__bar_elements--left {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 50%
+}
+
+.shop-container__bar_elements--right {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 50%;
+    justify-content: flex-end;
+}
+
+.log-as {
+    margin-left: 30px;
+    font-size: 20px;
+}
+
+#session__user {
+    color: #ebb224;
+    font-size: 20px;
 }
 
 .shop-container__logout {
     height: 40px;
     width: 100px;
-    border: 2px solid white;
+    border: 2px solid #ebb224;
     background-color: black;
     color: white;
+    text-transform: uppercase;
+    color: #bd9228;
+    font-size: 18px;
+    margin-left: 30px;
+    cursor: pointer;
+
 
 }
 
 
 
+.shop-container__logout:hover {
+    background-color: #ebb224;
+    color: black;
+}
+
+
+
 .basket__icon {
-    font-size: 30px;
+    position: relative;
+    background-color: black;
+    border-radius: 5%;
+    padding: 10px;
+    font-size: 35px;
+    color: #F4BC2A;
+    margin-right: 3rem;
+}
+
+.basket__amount {
+    position: absolute;
+    top: -20%;
+    left: -20%;
+    font-size: 16px;
+    color: black;
+    background-color: #ebb224;
+    border-radius: 50%;
+    height: 28px;
+    width: 28px;
+    text-align: center;
+    line-height: 26px;
+    border: 2px solid black;
 }
 
 
@@ -421,8 +482,8 @@ body {
     grid-area: shop;
     display: grid;
     padding: 50px;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 300px);
+    grid-template-columns: repeat(3, 400px);
+    grid-template-rows: repeat(3, 350px);
     column-gap: 20px;
     row-gap: 20px;
 
@@ -442,14 +503,24 @@ body {
     justify-content: space-around;
     transition: .2s all ease-in-out;
     cursor: pointer;
+    width: 100%;
+
+
 
 
 }
+
 
 .shop-container__single-item:hover>img {
 
     transform: scale(1.1);
 
+}
+
+.shop-container__single-item img {
+    object-fit: contain;
+    height: 70%;
+    width: 70%;
 }
 
 .shop-container__single-item__data {
@@ -468,10 +539,7 @@ body {
     font-size: 20px;
 }
 
-.shop-container__single-item img {
-    object-fit: contain;
-    height: 150px;
-}
+
 
 .buy {
     border: 2px solid #bd9228;
