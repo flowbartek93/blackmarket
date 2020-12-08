@@ -15,11 +15,6 @@
 
      run() {
 
-         //  console.log(this.form);
-         //  console.log(this.background);
-         //  console.log(this.body);
-
-
          this.body.style.backgroundColor = "black";
          setTimeout(() => {
              this.form.style.display = "none";

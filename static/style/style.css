@@ -223,7 +223,7 @@ body {
     text-align: center;
     color: red;
     font-size: 20px;
-    margin-top: 2rem;
+    margin-top: 10px;
 }
 
 .green-alert {
@@ -365,6 +365,23 @@ body {
     font-size: 20px;
 }
 
+.your-balance {
+    margin-left: 2rem;
+    font-size: 20px;
+
+}
+
+#balance {
+    color: darkgreen;
+    font-size: 22px;
+}
+
+#saldo {
+    color: darkred;
+    font-size: 22px;
+
+}
+
 .shop-container__logout {
     height: 40px;
     width: 100px;
@@ -425,6 +442,8 @@ body {
     box-shadow: 3px 3px 3px 0px black;
 
 
+
+
 }
 
 .shop-container__categories>a>button {
@@ -482,10 +501,11 @@ body {
     grid-area: shop;
     display: grid;
     padding: 50px;
-    grid-template-columns: repeat(3, 400px);
-    grid-template-rows: repeat(3, 350px);
+    grid-template-columns: repeat(4, 300px);
+    grid-template-rows: repeat(3, 300px);
     column-gap: 20px;
     row-gap: 20px;
+    place-content: center;
 
 
 
@@ -498,7 +518,7 @@ body {
     background-color: #050505;
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 20px;
     align-items: center;
     justify-content: space-around;
     transition: .2s all ease-in-out;
@@ -509,6 +529,7 @@ body {
 
 
 }
+
 
 
 .shop-container__single-item:hover>img {
@@ -532,7 +553,7 @@ body {
 }
 
 .single-item__title {
-    font-size: 24px;
+    font-size: 16px;
 }
 
 .single-item__price {
@@ -544,10 +565,10 @@ body {
 .buy {
     border: 2px solid #bd9228;
     background-color: #F4BC2A;
-    height: 50px;
+    height: 60px;
     width: 100px;
     text-transform: uppercase;
-    font-size: 22px;
+    font-size: 16px;
     color: black;
     font-weight: bold;
     transition: .2s ease-in-out;
@@ -563,5 +584,144 @@ body {
 .single-item__desc {
     font-size: 12px;
     text-align: justify;
+
+}
+
+
+
+/* Styles for checkout */
+
+.checkout-btn {
+    height: 100px;
+    background-color: black;
+    border: 2px solid #F4BC2A;
+    color: #F4BC2A;
+    text-transform: uppercase;
+    font-size: 40px;
+    transition: .2s;
+    cursor: pointer;
+    width: 250px;
+    place-self: center;
+    margin-top: 3rem;
+    display: none;
+
+}
+
+.checkout-btn:hover {
+
+    font-size: 44px;
+
+}
+
+
+.checkout-plane {
+    z-index: 50;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    filter: opacity(0.4);
+    display: none;
+
+
+}
+
+
+.checkout-plane__card {
+
+    position: absolute;
+    z-index: 100;
+    display: none;
+    top: 50%;
+    left: 50%;
+    height: 0px;
+    width: 0px;
+    transform: translate(-50%, -50%);
+    background-color: #0c0c0c;
+    border: 2px solid #F4BC2A;
+    animation: grow 0.3s 0s 1 normal forwards;
+    filter: opacity(1) !important;
+}
+
+.products {
+    flex-basis: 50%;
+    padding: 20px 0 20px 40px;
+}
+
+.confirmation {
+    display: flex;
+    flex-basis: 50%;
+    padding: 40px 0 20px 20px;
+}
+
+.products__your {
+    font-size: 32px;
+    font-weight: 700;
+
+}
+
+#products__price_span {
+    font-size: 26px;
+    font-weight: 500;
+    color: #F4BC2A;
+
+}
+
+.products__list--singleitem {
+    color: #bd9228;
+}
+
+.products__price {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.backBtn,
+.confirmBtn {
+    background-color: #1a1919;
+    color: #F4BC2A;
+    text-transform: uppercase;
+    border: 2px solid #F4BC2A;
+    border-radius: 10%;
+    font-size: 15px;
+    width: 10rem;
+    height: 3rem;
+    cursor: pointer;
+    margin: 5px;
+    place-self: flex-end;
+}
+
+.backBtn:hover,
+.confirmBtn:hover {
+
+    background-color: #bd9228;
+    color: black;
+}
+
+
+.vertical-line {
+    width: 1;
+    height: 80%;
+    color: #d39e18;
+    margin-bottom: 2rem;
+    float: right;
+    margin-top: -25%;
+    place-self: flex-end;
+
+}
+
+
+@keyframes grow {
+
+    0% {
+        height: 0px;
+        width: 0px;
+    }
+
+    100% {
+        height: 500px;
+        width: 1000px;
+    }
+
 
 }

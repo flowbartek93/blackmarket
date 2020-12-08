@@ -3,17 +3,7 @@ const path = require('path');
 const MongoClient = require('mongodb').MongoClient;
 const expressHandlebars = require('express-handlebars');
 const router = express.Router();
-const session = require('express-session')
-const {
-    resourceUsage
-} = require('process');
-const {
-    json
-} = require('body-parser');
-const {
-    request
-} = require('express');
-
+const session = require('express-session');
 let _db;
 
 /* express functions */
@@ -52,6 +42,7 @@ async function dbConnect() {
 async function registerUser(newUser) {
     await dbConnect();
     await _db.db('blackmarket').collection('users').insertOne(newUser);
+
 }
 
 /* Check if user exists */
@@ -62,18 +53,13 @@ async function checkUser(userData) {
     const foundUser = await content.find(singleuser => singleuser.login === userData.login && singleuser.password === userData.password)
 
     if (foundUser) {
-        return true;
-    } else if (!foundUser) {
+        return foundUser
+
+    } else {
         return false;
     }
 
-
 }
-
-
-
-
-
 
 
 /* User Registration */
@@ -82,6 +68,8 @@ app.post('/register', (req, res) => {
     res.end();
 })
 
+
+/* confirm purchase and update user informations */
 /* User login */
 
 app.post('/login', async (req, res) => {
@@ -90,11 +78,14 @@ app.post('/login', async (req, res) => {
     let sess;
     let userExists = await checkUser(req.body).catch(console.error)
 
-    if (userExists === true) {
+    console.log(userExists);
+
+    if (userExists) {
+
 
         sess = req.session
         sess.username = req.body.login;
-        console.log(sess.username);
+        sess.balance = userExists.cash;
 
 
         res.json({
@@ -102,7 +93,11 @@ app.post('/login', async (req, res) => {
             sess,
         })
     } else if (userExists === false) {
-        res.json(userExists)
+        console.log(userExists);
+
+        res.json({
+            userExists
+        })
     }
 
     res.end();
@@ -117,13 +112,6 @@ app.get('/weapons/:id', async (req, res) => {
     const content = await _db.db('blackmarket').collection('items').find().toArray();
     let contentItem;
     let type = req.params.id;
-
-    // if (type === 'pistols') {
-    //     contentItem = content[0].pistols;
-    // }
-
-
-
 
     switch (type) {
         case 'pistols':
@@ -143,11 +131,6 @@ app.get('/weapons/:id', async (req, res) => {
             break;
     }
 
-
-
-    console.log(contentItem);
-
-
     await res.render(type, {
             contentItem
         },
@@ -156,9 +139,26 @@ app.get('/weapons/:id', async (req, res) => {
 
         })
 
-
 })
 
+
+app.put('/confirm', async (req, res) => {
+
+    await dbConnect();
+    await _db.db('blackmarket').collection('users').findOneAndUpdate({
+            login: req.body.currentUser
+        }, {
+            $set: {
+                cash: req.body.saldoValue
+            }
+        }
+
+    )
+
+    await res.json(req.body.saldoValue)
+    await res.end();
+
+})
 
 
 app.listen(process.env.PORT || 5000, () => {

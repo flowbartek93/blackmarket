@@ -32,7 +32,8 @@ class Register {
 
         const userData = {
             login: this.inputLogin.value,
-            password: this.inputPassword.value
+            password: this.inputPassword.value,
+            cash: 10000,
         }
         return userData;
     }

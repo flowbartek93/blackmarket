@@ -27,10 +27,10 @@ export class Login {
 
             if (status === false) {
 
-                this.redalert("User does not exists")
 
-            } else if (status === true) {
-                console.log('okk');
+                this.redalert("User does not exist")
+
+            } else if (status) {
 
                 this.greenalert("Logging in...")
             }
@@ -56,14 +56,12 @@ export class Login {
             },
             body: JSON.stringify(userData)
         })
-
         const data = await response.json();
 
-        console.log(data);
 
 
 
-        if (data.userExists === true) {
+        if (data.userExists) {
             this.session = data.sess;
             console.log(this.session);
             this.startSession();
@@ -75,15 +73,12 @@ export class Login {
             });
 
             toshop.run();
+            return data.userExists;
 
 
+        } else if (data.userExists === false) {
 
-            return data.userExists
-
-
-
-        } else {
-            return data.userExists
+            return data.userExists;
         }
 
 
@@ -92,6 +87,7 @@ export class Login {
     startSession() {
         const session = window.sessionStorage;
         session.setItem('login', this.session.username);
+        session.setItem('balance', this.session.balance)
     }
     redalert(text) {
 
