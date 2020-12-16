@@ -30,6 +30,8 @@ class Shop {
     }
 
     chooseWeapon() {
+        /* Deafault display for first run*/
+        this.displayWeapon('pistols')
 
         this.buttons.forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -72,6 +74,8 @@ class Shop {
         const balanceSpan = document.querySelector('#balance')
         userSpan.textContent = user;
         balanceSpan.textContent = balance + "$";
+
+
     }
 
     static logout() {
@@ -88,10 +92,15 @@ class Shop {
         const buyBtn = document.querySelectorAll('.buy')
 
         let number = parseInt(this.basketAmount.textContent)
+        console.log(number);
+
+
 
         buyBtn.forEach(btn => {
             btn.addEventListener('click', () => {
+                let number = parseInt(this.basketAmount.textContent)
                 this.basketAmount.textContent = ++number
+                console.log(number);
 
 
                 let itemname = btn.previousElementSibling.previousElementSibling.textContent
@@ -316,6 +325,20 @@ class Shop {
 
     }
 
+    clearBasket() {
+        const clearBtn = document.querySelector('.bar__element-clear-btn')
+
+        clearBtn.addEventListener('click', () => {
+
+
+            this.items.splice(0, this.items.length)
+            console.log(this.items);
+            this.basketAmount.textContent = "0";
+            this.saldoSpan.textContent = this.balanceSpan.textContent
+            this.priceSpan.textContent = "0$"
+        })
+    }
+
 
 }
 
@@ -330,9 +353,10 @@ document.addEventListener('DOMContentLoaded', function () {
     weapons.chooseWeapon();
     /* Display weapons */
 
-    /* Display current user and let him log out */
+    /* Display current user and let him log out or clear basket */
     Shop.logout();
     Shop.displayUser();
+    weapons.clearBasket();
 
 
 
