@@ -10,6 +10,9 @@ class Shop {
         this.backBtn = document.querySelector('.backBtn')
         this.saldoSpan = document.querySelector('#saldo')
         this.balanceSpan = document.querySelector('#balance')
+        this.productsList = document.querySelector('.products__list')
+        this.priceSpan = document.querySelector('#products__price_span')
+        this.basketAmount = document.querySelector('.basket__amount')
 
     }
 
@@ -35,27 +38,14 @@ class Shop {
                 let weaponType = e.target.dataset.type
                 switch (weaponType) {
                     case 'pistols':
-
-
                         return this.displayWeapon(weaponType)
-
-
-
                     case 'rifles':
-
                         return this.displayWeapon(weaponType)
-
                     case 'grenades':
-
-
                         return this.displayWeapon(weaponType)
-
                     case 'closerange':
-
                         return this.displayWeapon(weaponType)
-
                     case 'rocketlauchner':
-
                         return this.displayWeapon(weaponType)
 
                 }
@@ -96,17 +86,17 @@ class Shop {
 
     buyItem() {
         const buyBtn = document.querySelectorAll('.buy')
-        const basketAmount = document.querySelector('.basket__amount')
-        let number = parseInt(basketAmount.textContent)
+
+        let number = parseInt(this.basketAmount.textContent)
 
         buyBtn.forEach(btn => {
             btn.addEventListener('click', () => {
-                basketAmount.textContent = ++number
+                this.basketAmount.textContent = ++number
 
 
                 let itemname = btn.previousElementSibling.previousElementSibling.textContent
                 let itemprice = parseInt(btn.previousElementSibling.textContent)
-                let id = btn.parentElement.dataset.id - 1;
+                let id = parseInt(btn.parentElement.dataset.id);
 
 
                 if (this.items.length === 0) {
@@ -115,6 +105,8 @@ class Shop {
                         name: itemname,
                         price: itemprice,
                         amount: 1,
+                        id,
+
                     })
                     this.displayCheckoutBtn();
                     return;
@@ -137,6 +129,8 @@ class Shop {
                             name: itemname,
                             price: itemprice,
                             amount: 1,
+                            id,
+
                         })
 
                         return;
@@ -148,6 +142,9 @@ class Shop {
 
             })
         })
+
+        console.log(this.items);
+
     }
 
 
@@ -167,10 +164,6 @@ class Shop {
         })
     }
     checkoutBoard() {
-
-        const productsList = document.querySelector('.products__list')
-        const priceSpan = document.querySelector('#products__price_span')
-
 
 
         /* Arrow functions that runs on after clicking back or confirm buttons */
@@ -192,29 +185,105 @@ class Shop {
 
 
         /* Checking if there are already items in checkout board, so after closing checkout window it deletes them, so they not duplicate themeselves */
-        while (productsList.hasChildNodes()) {
-            productsList.removeChild(productsList.childNodes[0]);
+        while (this.productsList.hasChildNodes()) {
+            this.productsList.removeChild(this.productsList.childNodes[0]);
         }
 
         /* Displaying items in basket in checkout card */
         this.items.forEach(item => {
+
+
+
             itemPrice = itemPrice + item.price;
             const paragraph = document.createElement('p')
+
+            const spanPlus = document.createElement('span')
+            const spanMinus = document.createElement('span')
+            spanPlus.className = "addIcon"
+            spanMinus.className = "minusIcon"
+            spanPlus.innerHTML = '<i class="fa fa-plus" aria-hidden="true"></i>'
+            spanMinus.innerHTML = '<i class="fa fa-minus" aria-hidden="true"></i>'
+
+
             paragraph.className = "products__list--singleitem"
-            paragraph.textContent = `${item.name} - ${item.price}$ -  x ${item.amount}`
-            productsList.appendChild(paragraph);
-            priceSpan.textContent = `${itemPrice}$`;
+            paragraph.setAttribute('data-id', item.id)
+            paragraph.innerHTML =
+                `<span class="item-name">${item.name}</span>
+              - <span class="item-price"> ${item.price / item.amount}$</span> -  x 
+              <span class="item-amount">${item.amount}</span>
+             `
+            this.productsList.appendChild(paragraph);
+            paragraph.appendChild(spanPlus)
+            paragraph.appendChild(spanMinus)
+
+            this.priceSpan.textContent = `${itemPrice}$`;
             this.saldoSpan.textContent = parseInt(this.balanceSpan.textContent) - itemPrice + "$";
         })
 
 
         /* let user decide whether to continue shopping or confirm purchase */
 
-
+        this.addItem();
+        this.deleteItem();
         this.confirmBtn.addEventListener('click', confirmation)
         this.backBtn.addEventListener('click', cancelation)
 
     }
+
+
+
+    addItem() {
+        const addBtns = document.querySelectorAll('.addIcon')
+        addBtns.forEach(btn => btn.addEventListener('click', () => {
+            let itemId = parseInt(btn.parentElement.dataset.id);
+            let amountSpan = btn.parentElement.children[2];
+            let itemPrice = btn.parentElement.children[1];
+            let newAmountValue = parseInt(amountSpan.textContent) + 1;
+            amountSpan.textContent = newAmountValue;
+
+            const riseAmountOf = this.items.find(item => item.id === itemId)
+            // console.log(riseAmountOf);
+            this.priceSpan.textContent = parseInt(this.priceSpan.textContent) + parseInt(itemPrice.textContent) + "$";
+            ++riseAmountOf.amount;
+            riseAmountOf.price = riseAmountOf.price + parseInt(itemPrice.textContent);
+
+
+        }))
+
+    }
+
+    deleteItem() {
+        const deleteBtns = document.querySelectorAll('.minusIcon')
+        deleteBtns.forEach(btn => btn.addEventListener('click', () => {
+            let itemId = parseInt(btn.parentElement.dataset.id);
+            let amountSpan = btn.parentElement.children[2];
+            let itemPrice = btn.parentElement.children[1];
+            let newAmountValue = parseInt(amountSpan.textContent) - 1;
+            amountSpan.textContent = newAmountValue;
+
+            if (parseInt(amountSpan.textContent) === 0) {
+                const itemToDelete = this.items.findIndex(item => item.id === itemId)
+                btn.parentElement.remove();
+                this.items.splice(itemToDelete, 1)
+                this.priceSpan.textContent = parseInt(this.priceSpan.textContent) - parseInt(itemPrice.textContent) + "$";
+                this.saldoSpan.textContent = parseInt(this.saldoSpan.textContent) + parseInt(itemPrice.textContent) + "$";
+
+                // console.log(itemToDelete);
+                // console.log(this.items);
+            } else if (parseInt(amountSpan.textContent) > 0) {
+                const reduceAmountOf = this.items.find(item => item.id === itemId)
+                console.log(reduceAmountOf);
+                this.priceSpan.textContent = parseInt(this.priceSpan.textContent) - parseInt(itemPrice.textContent) + "$";
+                --reduceAmountOf.amount;
+
+            }
+
+
+        }))
+    }
+
+
+
 
     confirm() {
 
@@ -244,7 +313,6 @@ class Shop {
     cancel() {
         this.backgroundplane.style.display = "none";
         this.checkoutPlane.style.display = "none";
-
 
     }
 

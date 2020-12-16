@@ -496,7 +496,6 @@ body {
 }
 
 
-
 .shop-container__items {
     grid-area: shop;
     display: grid;
@@ -669,6 +668,35 @@ body {
 
 .products__list--singleitem {
     color: #bd9228;
+    position: relative;
+
+}
+
+.addIcon {
+    color: darkgreen;
+    top: 50%;
+    left: 70%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    position: absolute;
+}
+
+.minusIcon {
+    color: darkred;
+    top: 50%;
+    left: 80%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    position: absolute;
+}
+
+.addIcon:hover {
+    font-size: 18px;
+
+}
+
+.minusIcon:hover {
+    font-size: 18px;
 }
 
 .products__price {

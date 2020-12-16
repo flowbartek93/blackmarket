@@ -113,9 +113,13 @@ app.get('/weapons/:id', async (req, res) => {
     let contentItem;
     let type = req.params.id;
 
+
+
+
     switch (type) {
         case 'pistols':
             contentItem = content[0].pistols;
+            console.log(contentItem);
             break;
         case 'rifles':
             contentItem = content[1].rifles;
