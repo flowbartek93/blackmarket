@@ -30,6 +30,7 @@ class Shop {
     }
 
     chooseWeapon() {
+
         /* Deafault display for first run*/
         this.displayWeapon('pistols')
 
